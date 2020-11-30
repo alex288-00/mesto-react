@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import "../index.css";
 
 function App() {
+  // Переменные состояния профиля и обработчики для открытия попапов
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -22,24 +23,23 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   }
 
-  const [selectedCard, setSelectedCard] = useState(false)
-  const [cardInfo, setCardInfo] = useState({})
+  //Переменная состояния для карточки
+  const [selectedCard, setSelectedCard] = useState(false);
 
-  function handleCardClick (props) {
-    setSelectedCard(true)
-    setCardInfo(
-      {
-        src: props.src,
-        name: props.name
-      }
-    )
+  //Функция открытия попапа изображения и передачи данных для карточки
+  function handleCardClick(props) {
+    setSelectedCard({
+      src: props.src,
+      name: props.name,
+    });
   }
 
+  //Функия закрытия попапов
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(false)
+    setSelectedCard(false);
   }
 
   return (
@@ -51,7 +51,7 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
       />
-      
+
       <Footer />
       <PopupWithForm
         isOpen={isEditProfilePopupOpen}
@@ -160,8 +160,7 @@ function App() {
       />
 
       <PopupWithForm name="form-confirm" title="Вы уверены?" textBtn="Да" />
-      <ImagePopup cardOpen={selectedCard} onClose={closeAllPopups} cardData={cardInfo} />
-
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
   );
 }

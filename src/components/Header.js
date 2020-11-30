@@ -1,3 +1,5 @@
+//Компонент шапки приложения
+
 function Header() {
   return (
     <header className="header">

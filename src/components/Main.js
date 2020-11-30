@@ -4,14 +4,17 @@ import Card from "./Card.js";
 import api from "../utils/Api.js";
 
 function Main(props) {
+  //Переменные состояния данных пользователя
   const [userName, setUserName] = useState("");
 
   const [userDescription, setUserDescription] = useState("");
 
   const [userAvatar, setUserAvatar] = useState("#");
 
+  //Переменная состояния карточки
   const [cards, setCards] = useState([]);
 
+  //Эффект совершает запрос в API за карточками
   useEffect(() => {
     api
       .getInitialCards()
@@ -32,6 +35,7 @@ function Main(props) {
       });
   }, []);
 
+  //Эффект совершает запрос в API за пользовательскими данными
   useEffect(() => {
     api
       .getUserData()
