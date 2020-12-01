@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Card from "./Card.js";
-import api from "../utils/Api.js";
+import api from "../utils/api.js";
 
 function Main(props) {
   //Переменные состояния данных пользователя
@@ -40,9 +40,9 @@ function Main(props) {
     api
       .getUserData()
       .then((res) => {
-        setUserName(res);
-        setUserDescription(res);
-        setUserAvatar(res);
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
       })
       .catch((err) => {
         console.log("Произошла ошибка:", err);
@@ -53,11 +53,7 @@ function Main(props) {
     <main className="content">
       <section className="profile">
         <div className="profile__container">
-          <img
-            className="profile__avatar"
-            src={userAvatar.avatar}
-            alt={userName.name}
-          />
+          <img className="profile__avatar" src={userAvatar} alt={userName} />
           <div className="profile__update">
             <button
               className="profile__update-btn"
@@ -67,13 +63,13 @@ function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__info-edit">
-            <h2 className="profile__info-name">{userName.name}</h2>
+            <h2 className="profile__info-name">{userName}</h2>
             <button
               className="profile__info-editbutton"
               onClick={props.onEditProfile}
             />
           </div>
-          <p className="profile__info-job">{userDescription.about}</p>
+          <p className="profile__info-job">{userDescription}</p>
         </div>
         <button
           className="profile__info-addbutton"

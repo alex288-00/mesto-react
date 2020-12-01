@@ -12,7 +12,12 @@ function Card(props) {
   return (
     <div className="element">
       <button className="element__trash"></button>
-      <img className="element__image" src={props.src} onClick={handleClick} />
+      <img
+        className="element__image"
+        src={props.src}
+        alt={props.name}
+        onClick={handleClick}
+      />
       <div className="element__title-like">
         <h3 className="element__title">{props.name}</h3>
         <div className="element__like-counter">
