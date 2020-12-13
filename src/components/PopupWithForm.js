@@ -1,22 +1,26 @@
 //Компонент с общей разметкой попапов
 
-function PopupWithForm(props) {
+function PopupWithForm({
+  name,
+  title,
+  textBtn,
+  children,
+  isOpen,
+  onClose,
+  onSubmit,
+}) {
   return (
-    <div
-      className={`popup popup_${props.name} ${
-        props.isOpen ? "popup_opened" : ""
-      }`}
-    >
-      <form className={`popup__form popup__form_${props.nameForm} `} noValidate>
-        <h2 className="popup__title popup__title_profile">{props.title}</h2>
-        <button
-          type="button"
-          className="popup__close"
-          onClick={props.onClose}
-        />
-        {props.children}
+    <div className={`popup popup_${name} ${isOpen ? "popup_opened" : ""}`}>
+      <form
+        className={`popup__form popup__form_${name} `}
+        onSubmit={onSubmit}
+        noValidate
+      >
+        <h2 className="popup__title popup__title_profile">{title}</h2>
+        <button type="button" className="popup__close" onClick={onClose} />
+        {children}
         <button type="submit" className="popup__button">
-          {props.textBtn}
+          {textBtn}
         </button>
       </form>
     </div>

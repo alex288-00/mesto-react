@@ -1,16 +1,12 @@
 //Компонент попапа изображения
 
-function ImagePopup(props) {
+function ImagePopup({ card, onClose }) {
   return (
-    <div className={`popup popup_img ${props.card ? "popup_opened" : ""}`}>
+    <div className={`popup popup_img ${card ? "popup_opened" : ""}`}>
       <div className="popup__zoom-container">
-        <button className="popup__close" onClick={props.onClose} />
-        <img
-          className="popup__image"
-          src={props.card.src}
-          alt={props.card.name}
-        />
-        <p className="popup__subtitle">{props.card.name}</p>
+        <button className="popup__close" onClick={onClose} />
+        <img className="popup__image" src={card.src} alt={card.name} />
+        <p className="popup__subtitle">{card.name}</p>
       </div>
     </div>
   );
