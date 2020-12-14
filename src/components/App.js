@@ -69,8 +69,8 @@ function App() {
       })
       .finally(() => {
         setLoader("Сохранить");
+        closeAllPopups();
       });
-    closeAllPopups();
   }
 
   //Обработчик аватара пользователя
@@ -87,9 +87,8 @@ function App() {
 
       .finally(() => {
         setLoader("Сохранить");
+        closeAllPopups();
       });
-
-    closeAllPopups();
   }
 
   //Обработчик создания новой карточки
@@ -105,25 +104,35 @@ function App() {
       })
       .finally(() => {
         setPlaceLoader("Создать");
+        closeAllPopups();
       });
-    closeAllPopups();
   }
 
   //Обработчик лайка карточки
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log("Произошла ошибка:", err);
+      });
   }
 
   //Обработчик удаления карточек
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      const newCardData = cards.filter((c) => c._id !== card._id);
-      setCards(newCardData);
-    });
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        const newCardData = cards.filter((c) => c._id !== card._id);
+        setCards(newCardData);
+      })
+      .catch((err) => {
+        console.log("Произошла ошибка:", err);
+      });
   }
 
   //Эффект совершает запрос в API за карточками
